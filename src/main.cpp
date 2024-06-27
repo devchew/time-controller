@@ -1,60 +1,76 @@
 #include <Arduino.h>
-#include <U8g2lib.h>
-#include <RotaryEncoder.h>
+#include "Relay.h"
+#include "Buttons.h"
+#include "Screen.h"
 
-// display setup
-#ifdef U8X8_HAVE_HW_SPI
-#include <SPI.h>
-#endif
-#ifdef U8X8_HAVE_HW_I2C
-#include <Wire.h>
-#endif
-U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*/ 8);						// Nokia 5110 Display
+// sreens
+enum Screen {
+  MAIN = 0,
+  SETTINGS = 1
+};
 
-// buttons setup
-#define BUTTON_UP 4
-#define BUTTON_DOWN 2
-#define BUTTON_OK 3
+Screen currentScreen = MAIN;
 
-// relay setup
-#define RELAY 5
-bool relayState = false;
-
-void setup(void) {
-  u8g2.begin(); 
-  pinMode(BUTTON_UP, INPUT_PULLUP);
-  pinMode(BUTTON_DOWN, INPUT_PULLUP);
-  pinMode(BUTTON_OK, INPUT_PULLUP);
-  pinMode(RELAY, OUTPUT);
+void setScreen(Screen screen) {
+  currentScreen = screen;
 }
 
-void loop(void) {
+void drawMainScreen() {
+  Button button = getButton();
 
-  // read buttons
-  if (digitalRead(BUTTON_UP) == LOW) {
-    relayState = true;
-    digitalWrite(RELAY, HIGH);
+  if ( button == OK ) {
+    setScreen(SETTINGS);
   }
-
-  if (digitalRead(BUTTON_DOWN) == LOW) {
-    relayState = false;
-    digitalWrite(RELAY, LOW);
-  }
-
-  if (digitalRead(BUTTON_OK) == LOW) {
-    relayState = !relayState;
-    digitalWrite(RELAY, relayState ? HIGH : LOW);
-    delay(100);
-  }
-
 
   u8g2.firstPage();
   do {
-    u8g2.drawHLine(0,0,10);
-    u8g2.drawHLine(0,51,10);
-  
     u8g2.setFont(u8g2_font_ncenB10_tr);
-    u8g2.drawStr(0,24,relayState ? "ON" : "OFF");
+    u8g2.drawStr(0, 24, "Main");
+
+    u8g2.setFont(u8g2_font_ncenB24_tr);
+    u8g2.setCursor(0, 48);
+    u8g2.print(getRelay() ? "ON" : "OFF");
+    
   } while ( u8g2.nextPage() );
-  //delay(1000);
+}
+
+void drawSettingsScreen() {
+  Button button = getButton();
+
+  if ( button == OK ) {
+    setScreen(MAIN);
+  }
+  if ( button == UP ) {
+    setRelay(true);
+  }
+
+  if ( button == DOWN ) {
+    setRelay(false);
+  }
+  u8g2.firstPage();
+  do {
+    u8g2.setFont(u8g2_font_ncenB10_tr);
+    u8g2.drawStr(0, 24, "Settings");
+  } while ( u8g2.nextPage() );
+}
+
+
+// setup
+
+void setup(void) {
+  u8g2.begin(); 
+  setupButtons();
+  setupRelay();
+}
+
+
+void loop(void) {
+  switch (currentScreen) {
+    case MAIN:
+      drawMainScreen();
+      break;
+    case SETTINGS:
+      drawSettingsScreen();
+      break;
+  }
 }
