@@ -2,21 +2,21 @@
 
 #define DEBOUNCE_DELAY 200
 
-Button getState() {
-    if (digitalRead(BUTTON_UP) == LOW) {
-        return UP;
+Button getButtonState() {
+    if (digitalRead(BUTTON_CENTER) == LOW) {
+        return CENTER;
     }
-    if (digitalRead(BUTTON_DOWN) == LOW) {
-        return DOWN;
+    if (digitalRead(BUTTON_LEFT) == LOW) {
+        return LEFT;
     }
-    if (digitalRead(BUTTON_OK) == LOW) {
-        return OK;
+    if (digitalRead(BUTTON_RIGHT) == LOW) {
+        return RIGHT;
     }
     return (Button) -1;
 }
 
 Button getButton() {
-    Button newState = getState();
+    Button newState = getButtonState();
     if (newState == (Button) -1) {
         return (Button) -1;
     }
@@ -26,8 +26,8 @@ Button getButton() {
 }
 
 void setupButtons() {
-  pinMode(BUTTON_UP, INPUT_PULLUP);
-  pinMode(BUTTON_DOWN, INPUT_PULLUP);
-  pinMode(BUTTON_OK, INPUT_PULLUP);
+  pinMode(BUTTON_RIGHT, INPUT_PULLUP);
+  pinMode(BUTTON_CENTER, INPUT_PULLUP);
+  pinMode(BUTTON_LEFT, INPUT_PULLUP);
 
 }

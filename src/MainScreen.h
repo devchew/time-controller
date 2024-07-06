@@ -5,6 +5,7 @@
 #include <U8g2lib.h>
 #include "Buttons.h"
 #include "Screens.h"
+#include "State.h"
 
 void drawMainScreen(Button button);
 void setupMainScreen();

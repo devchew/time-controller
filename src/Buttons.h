@@ -3,14 +3,14 @@
 
 #include <Arduino.h>
 
-#define BUTTON_UP 4
-#define BUTTON_DOWN 2
-#define BUTTON_OK 3
+#define BUTTON_RIGHT 2
+#define BUTTON_LEFT 4
+#define BUTTON_CENTER 3
 
 enum Button {
-  UP = 0,
-  DOWN = 1,
-  OK = 2
+  RIGHT = 0,
+  LEFT = 1,
+  CENTER = 2
 };
 
 Button getButton();

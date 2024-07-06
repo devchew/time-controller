@@ -7,15 +7,15 @@ void setupSettingsScreen() {
 }
 
 void drawSettingsScreen(Button button) {
-  if ( button == UP ) {
+  if ( button == CENTER ) {
     option = (option + 1) % 2;
   }
 
-  if ( button == DOWN ) {
+  if ( button == RIGHT ) {
     option = (option - 1) % 2;
   }
 
-    if ( button == OK ) {
+    if ( button == LEFT ) {
         setScreen(MAIN);    
     }
 
