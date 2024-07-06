@@ -35,4 +35,5 @@ void loop(void) {
 
   scheduleLoop();
   drawScreen();
+  relayLoop();
 }

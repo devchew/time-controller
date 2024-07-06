@@ -1,13 +1,16 @@
 #include "Relay.h"
 
-bool relayState = false;
+extern State state;
 
 void setRelay(bool state) {
-  relayState = state;
-  digitalWrite(RELAY, relayState ? HIGH : LOW);
+  digitalWrite(RELAY, state ? LOW : HIGH);
 }
 
 void setupRelay() {
   pinMode(RELAY, OUTPUT);
   setRelay(false);
+}
+
+void relayLoop() {
+  setRelay(state.isOn);
 }

@@ -7,7 +7,7 @@ void setupState() {
   state.scheduleTo = 18 * 60;
   state.currentTime = 20 * 60 + 32;
   state.isOn = false;
-  state.isAuto = false;
+  state.isAuto = true;
 }
 
 void saveState() {

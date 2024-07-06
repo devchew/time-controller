@@ -10,14 +10,16 @@ char fromHours[3] = "--";
 char toMinutes[3] = "--";
 char toHours[3] = "--";
 
+int newFrom = 0;
+int newTo = 0;
 
 void convert() {
 
-  sprintf(fromHours, "%02d", state.scheduleFrom / 60);
-  sprintf(fromMinutes, "%02d", state.scheduleFrom % 60);
+  sprintf(fromHours, "%02d", newFrom / 60);
+  sprintf(fromMinutes, "%02d", newFrom % 60);
 
-  sprintf(toHours, "%02d", state.scheduleTo / 60);
-  sprintf(toMinutes, "%02d", state.scheduleTo % 60);
+  sprintf(toHours, "%02d", newTo / 60);
+  sprintf(toMinutes, "%02d", newTo % 60);
 }
 
 
@@ -31,62 +33,66 @@ void drawScheduleScreen(Button button) {
 
   if (button == RIGHT) {
     if (highlighted == 0) {
-      state.scheduleFrom += 60;
-      if (state.scheduleFrom >= 1440) {
-        state.scheduleFrom = 0;
+      newFrom += 60;
+      if (newFrom >= 1440) {
+        newFrom = 0;
       }
     }
     if (highlighted == 1) {
-      state.scheduleFrom++;
-      if (state.scheduleFrom >= 1440) {
-        state.scheduleFrom = 0;
+      newFrom++;
+      if (newFrom >= 1440) {
+        newFrom = 0;
       }
     }
     if (highlighted == 2) {
-      state.scheduleTo += 60;
-      if (state.scheduleTo >= 1440) {
-        state.scheduleTo = 0;
+      newTo += 60;
+      if (newTo >= 1440) {
+        newTo = 0;
       }
     }
     if (highlighted == 3) {
-      state.scheduleTo++;
-      if (state.scheduleTo >= 1440) {
-        state.scheduleTo = 0;
+      newTo++;
+      if (newTo >= 1440) {
+        newTo = 0;
       }
     }
     if (highlighted == 4) {
       //save
       setScreen(MAIN);
+      state.scheduleFrom = newFrom;
+      state.scheduleTo = newTo;
     }
     if (highlighted == 5) {
       //cancel
       setScreen(MAIN);
+      newFrom = state.scheduleFrom;
+      newTo = state.scheduleTo;
     }
   }
 
   if (button == LEFT) {
     if (highlighted == 0) {
-      state.scheduleFrom -= 60;
-      if (state.scheduleFrom < 0) {
-        state.scheduleFrom = 1439;
+      newFrom -= 60;
+      if (newFrom < 0) {
+        newFrom = 1439;
       }
     }
     if (highlighted == 1) {
-      state.scheduleFrom--;
-      if (state.scheduleFrom < 0) {
-        state.scheduleFrom = 1439;
+      newFrom--;
+      if (newFrom < 0) {
+        newFrom = 1439;
       }
     }
     if (highlighted == 2) {
-      state.scheduleTo -= 60;
-      if (state.scheduleTo < 0) {
-        state.scheduleTo = 1439;
+      newTo -= 60;
+      if (newTo < 0) {
+        newTo = 1439;
       }
     }
     if (highlighted == 3) {
-      state.scheduleTo--;
-      if (state.scheduleTo < 0) {
-        state.scheduleTo = 1439;
+      newTo--;
+      if (newTo < 0) {
+        newTo = 1439;
       }
     }
   }
@@ -139,5 +145,7 @@ void drawScheduleScreen(Button button) {
 
 void setupScheduleScreen(){
   highlighted = 0;
+  newFrom = state.scheduleFrom;
+  newTo = state.scheduleTo;
   convert();
 };

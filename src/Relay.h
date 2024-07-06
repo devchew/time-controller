@@ -2,13 +2,12 @@
 #define RELAY_H
 
 #include <Arduino.h>
+#include "State.h"
 
 #define RELAY 5
 
-void setRelay(bool state);
-
-bool getRelay();
 
 void setupRelay();
+void relayLoop();
 
 #endif

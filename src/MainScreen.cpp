@@ -58,15 +58,16 @@ void drawMainScreen(Button button) {
 
     // clock
     u8g2.setFont(u8g2_font_6x13_tr);
-    u8g2.drawStr(27, 14, getTime().c_str());
+    u8g2.drawStr(27, 16, getTime().c_str());
 
     // state
     u8g2.setFont(u8g2_font_4x6_tr);
     if (state.isAuto) {
-      u8g2.drawStr(66, 6, "AUTO");
-    } else {
-      u8g2.drawStr(state.isOn ? 72 : 69, 6, state.isOn ? "ON" : "OFF");
+      u8g2.drawStr(48, 5, "AUTO");
+      u8g2.drawLine(66, 1, 66, 4);
     }
+    u8g2.drawStr(state.isOn ? 72 : 69, 5, state.isOn ? "On" : "OFF");
+    
   } while (u8g2.nextPage());
 }
 
