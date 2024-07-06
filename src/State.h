@@ -2,7 +2,7 @@
 #define STATE_H
 
 #include <Arduino.h>
-
+#include <EEPROM.h>
 
 struct State {
     // schedule starting time in minutes

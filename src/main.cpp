@@ -5,6 +5,7 @@
 #include "State.h"
 #include "Scheduler.h"
 #include "Time.h"
+#include "Remote.h"
 
 #include "Screen.h"
 #include "Screens.h"
@@ -21,22 +22,14 @@ void setup(void) {
   setupScreens();
   setupScheduler();
   setupTime();
+  setupRemote();
 }
 
 
 void loop(void) {
-
-  // tick current time every minute
-  if (millis() - lastTimeUpdate > 60000) {
-    lastTimeUpdate = millis();
-    state.currentTime++;
-    if (state.currentTime >= 1440) {
-      state.currentTime = 0;
-    }
-  }
-
-  scheduleLoop();
-  drawScreen();
-  relayLoop();
   timeLoop();
+  scheduleLoop();
+  relayLoop();
+  remoteLoop();
+  drawScreen();
 }

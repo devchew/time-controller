@@ -61,6 +61,7 @@ void drawScheduleScreen(Button button) {
       setScreen(MAIN);
       state.scheduleFrom = newFrom;
       state.scheduleTo = newTo;
+      saveState();
     }
     if (highlighted == 5) {
       //cancel
