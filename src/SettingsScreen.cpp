@@ -1,23 +1,45 @@
 #include "SettingsScreen.h"
 extern U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2;
+extern State state;
 
 int option = 0;
 
-void setupSettingsScreen() {
-}
+#define OPTIONSLIST_SIZE 3
+
+static String options[OPTIONSLIST_SIZE] = {
+  "Time",
+  "Schedule",
+  "Exit"
+};
+
+void setupSettingsScreen() {}
 
 void drawSettingsScreen(Button button) {
-  if ( button == CENTER ) {
-    option = (option + 1) % 2;
-  }
-
-  if ( button == RIGHT ) {
-    option = (option - 1) % 2;
-  }
-
-    if ( button == LEFT ) {
-        setScreen(MAIN);    
+  if (button == RIGHT) {
+    option++;
+    if (option >= OPTIONSLIST_SIZE) {
+      option = 0;
     }
+  }
+
+  if (button == LEFT) {
+    option--;
+    if (option < 0) {
+      option = OPTIONSLIST_SIZE - 1;
+    }
+  }
+
+  if (button == CENTER) {
+    if (option == 0) {
+      state.isAuto = !state.isAuto;
+    }
+    if (option == 1) {
+      state.isOn = !state.isOn;
+    }
+    if (option == 2) {
+      setScreen(MAIN);
+    }
+  }
 
   u8g2.firstPage();
   do {
@@ -29,13 +51,13 @@ void drawSettingsScreen(Button button) {
     u8g2.drawLine(6, 42, 9, 45);
     u8g2.drawLine(9, 45, 12, 42);
     u8g2.setFont(u8g2_font_6x10_tr);
-    u8g2.drawStr(4, 11, "Time");
-    if (option == 0) {
-        u8g2.drawLine(4, 12, 79, 12);
+
+    for(int i = 0; i < OPTIONSLIST_SIZE; i++) {
+      u8g2.drawStr(4, 11 + 12 * i, options[i].c_str());
+      if (option == i) {
+        u8g2.drawLine(4, 12 + 12 * i, 79, 12 + 12 * i);
+      }
     }
-    u8g2.drawStr(4, 23, "Schedule");
-    if (option == 1) {
-        u8g2.drawLine(4, 24, 79, 24);
-    }
-  } while ( u8g2.nextPage() );
+
+  } while (u8g2.nextPage());
 }
