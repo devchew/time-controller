@@ -7,6 +7,8 @@
 #include "Screens.h"
 #include "State.h"
 
+static const unsigned char time_dots[] U8X8_PROGMEM = {0x01,0x00,0x00,0x00,0x01};
+
 void drawScheduleScreen(Button button);
 void setupScheduleScreen();
 

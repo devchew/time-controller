@@ -15,14 +15,14 @@ static String options[OPTIONSLIST_SIZE] = {
 void setupSettingsScreen() {}
 
 void drawSettingsScreen(Button button) {
-  if (button == RIGHT) {
+  if (button == LEFT) {
     option++;
     if (option >= OPTIONSLIST_SIZE) {
       option = 0;
     }
   }
 
-  if (button == LEFT) {
+  if (button == RIGHT) {
     option--;
     if (option < 0) {
       option = OPTIONSLIST_SIZE - 1;
