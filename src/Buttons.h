@@ -4,8 +4,8 @@
 #include <Arduino.h>
 
 #define BUTTON_RIGHT 4
-#define BUTTON_LEFT 2
-#define BUTTON_CENTER 3
+#define BUTTON_LEFT 6
+#define BUTTON_CENTER 7
 
 enum Button {
   RIGHT = 0,

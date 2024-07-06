@@ -4,6 +4,7 @@
 #include "Buttons.h"
 #include "State.h"
 #include "Scheduler.h"
+#include "Time.h"
 
 #include "Screen.h"
 #include "Screens.h"
@@ -19,6 +20,7 @@ void setup(void) {
   setupState();
   setupScreens();
   setupScheduler();
+  setupTime();
 }
 
 
@@ -36,4 +38,5 @@ void loop(void) {
   scheduleLoop();
   drawScreen();
   relayLoop();
+  timeLoop();
 }
