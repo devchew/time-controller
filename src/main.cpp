@@ -3,6 +3,7 @@
 #include "Relay.h"
 #include "Buttons.h"
 #include "State.h"
+#include "Scheduler.h"
 
 #include "Screen.h"
 #include "Screens.h"
@@ -17,6 +18,7 @@ void setup(void) {
   setupRelay();
   setupState();
   setupScreens();
+  setupScheduler();
 }
 
 
@@ -31,5 +33,6 @@ void loop(void) {
     }
   }
 
+  scheduleLoop();
   drawScreen();
 }
