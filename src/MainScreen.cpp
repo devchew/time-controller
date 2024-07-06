@@ -34,8 +34,8 @@ void drawMainScreen(Button button) {
 
   u8g2.firstPage();
   do {
-    u8g2.setFont(u8g2_font_4x6_tr);
     //bottom bar
+    u8g2.setFont(u8g2_font_4x6_tr);
     u8g2.drawStr(26, 46, "Settings");
     u8g2.drawLine(0, 38, 83, 38);
 

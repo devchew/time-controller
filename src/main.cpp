@@ -6,10 +6,7 @@
 
 #include "Screen.h"
 #include "Screens.h"
-#include "SettingsScreen.h"
-#include "MainScreen.h"
 
-extern Screen currentScreen;
 extern State state;
 
 unsigned long lastTimeUpdate = 0;
@@ -19,9 +16,7 @@ void setup(void) {
   setupButtons();
   setupRelay();
   setupState();
-
-  setupSettingsScreen();
-  setupMainScreen();
+  setupScreens();
 }
 
 
@@ -36,12 +31,5 @@ void loop(void) {
     }
   }
 
-  switch (currentScreen) {
-    case MAIN:
-      drawMainScreen(getButton());
-      break;
-    case SETTINGS:
-      drawSettingsScreen(getButton());
-      break;
-  }
+  drawScreen();
 }

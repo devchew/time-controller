@@ -34,7 +34,7 @@ void drawSettingsScreen(Button button) {
       state.isAuto = !state.isAuto;
     }
     if (option == 1) {
-      state.isOn = !state.isOn;
+      setScreen(SCHEDULE);
     }
     if (option == 2) {
       setScreen(MAIN);
@@ -43,6 +43,7 @@ void drawSettingsScreen(Button button) {
 
   u8g2.firstPage();
   do {
+    //bottom bar
     u8g2.setFont(u8g2_font_4x6_tr);
     u8g2.drawStr(37, 46, "OK");
     u8g2.drawLine(0, 38, 83, 38);
@@ -50,6 +51,8 @@ void drawSettingsScreen(Button button) {
     u8g2.drawLine(72, 41, 75, 44);
     u8g2.drawLine(6, 42, 9, 45);
     u8g2.drawLine(9, 45, 12, 42);
+
+    // options
     u8g2.setFont(u8g2_font_6x10_tr);
 
     for(int i = 0; i < OPTIONSLIST_SIZE; i++) {
