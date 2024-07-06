@@ -7,7 +7,7 @@ int option = 0;
 #define OPTIONSLIST_SIZE 3
 
 static String options[OPTIONSLIST_SIZE] = {
-  "Time",
+  "Auto",
   "Schedule",
   "Exit"
 };
@@ -56,7 +56,13 @@ void drawSettingsScreen(Button button) {
     u8g2.setFont(u8g2_font_6x10_tr);
 
     for(int i = 0; i < OPTIONSLIST_SIZE; i++) {
-      u8g2.drawStr(4, 11 + 12 * i, options[i].c_str());
+      if (i == 0 && state.isAuto) {
+        u8g2.drawStr(4, 11 + 12 * i, "Auto: on");
+      } else if (i == 0 && !state.isAuto) {
+        u8g2.drawStr(4, 11 + 12 * i, "Auto: off");
+      } else {
+        u8g2.drawStr(4, 11 + 12 * i, options[i].c_str());
+      }
       if (option == i) {
         u8g2.drawLine(4, 12 + 12 * i, 79, 12 + 12 * i);
       }
