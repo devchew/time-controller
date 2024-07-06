@@ -1,6 +1,6 @@
 #include "Buttons.h"
 
-#define DEBOUNCE_DELAY 100
+#define DEBOUNCE_DELAY 200
 
 Button getState() {
     if (digitalRead(BUTTON_UP) == LOW) {
@@ -17,6 +17,9 @@ Button getState() {
 
 Button getButton() {
     Button newState = getState();
+    if (newState == (Button) -1) {
+        return (Button) -1;
+    }
     delay(DEBOUNCE_DELAY);
 
     return newState;
