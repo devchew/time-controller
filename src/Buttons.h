@@ -3,9 +3,9 @@
 
 #include <Arduino.h>
 
-#define BUTTON_RIGHT 4
-#define BUTTON_LEFT 6
-#define BUTTON_CENTER 7
+#define BUTTON_RIGHT 3
+#define BUTTON_LEFT 4
+#define BUTTON_CENTER 2
 
 enum Button {
   RIGHT = 0,

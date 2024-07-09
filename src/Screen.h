@@ -11,6 +11,7 @@
 #ifdef U8X8_HAVE_HW_I2C
 #include <Wire.h>
 #endif
-U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*/ 8);						// Nokia 5110 Display
+
+U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 14, /* reset=*/ 15);						// Nokia 5110 Display
 
 #endif
