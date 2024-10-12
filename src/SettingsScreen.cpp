@@ -2,9 +2,9 @@
 extern U8G2_KS0108_128X64_1 u8g2;
 extern State state;
 
-int selected = 0;
-int previousSelected = 0;
-int nextSelected = 0;
+extern int highlighted;
+int previousHighlighted;
+int nextHighlighted;
 
 #define OPTIONSLIST_SIZE 5
 
@@ -17,7 +17,7 @@ static String options[OPTIONSLIST_SIZE] = {
 };
 
 void selectScreen() {
-  switch (selected) {
+  switch (highlighted) {
     case 0:
       setScreen(TIME);
       break;
@@ -37,36 +37,35 @@ void selectScreen() {
 }
 
 void updateSelected() {
-  previousSelected = selected - 1;
-  nextSelected = selected + 1;
+  previousHighlighted = highlighted - 1;
+  nextHighlighted = highlighted + 1;
 
-  if (selected >= OPTIONSLIST_SIZE) {
-    selected = 0;
+  if (highlighted >= OPTIONSLIST_SIZE) {
+    highlighted = 0;
   }
-  if (selected < 0) {
-    selected = OPTIONSLIST_SIZE - 1;
+  if (highlighted < 0) {
+    highlighted = OPTIONSLIST_SIZE - 1;
   }
-  if (previousSelected < 0) {
-    previousSelected = OPTIONSLIST_SIZE - 1;
+  if (previousHighlighted <= 0) {
+    previousHighlighted = OPTIONSLIST_SIZE - 1;
   }
-  if (nextSelected >= OPTIONSLIST_SIZE) {
-    nextSelected = 0;
+  if (nextHighlighted >= OPTIONSLIST_SIZE) {
+    nextHighlighted = 0;
   }
 }
 
 void setupSettingsScreen() {
-  selected = 0;
   updateSelected();
 }
 
 void drawSettingsScreen(Button button) {
   if (button == RIGHT) {
-    selected++;
+    highlighted++;
     updateSelected();
   }
 
   if (button == LEFT) {
-    selected--;
+    highlighted--;
     updateSelected();
   }
 
@@ -84,18 +83,18 @@ void drawSettingsScreen(Button button) {
     u8g2.drawRFrame(0, 18, 122, 16, 2);
 
     //previous
-    u8g2.drawStr(2, 11, options[previousSelected].c_str());
+    u8g2.drawStr(2, 11, options[previousHighlighted].c_str());
 
     //current
-    u8g2.drawStr(2, 29, options[selected].c_str());
+    u8g2.drawStr(2, 29, options[highlighted].c_str());
 
     //next
-    u8g2.drawStr(2, 46, options[nextSelected].c_str());
+    u8g2.drawStr(2, 46, options[nextHighlighted].c_str());
 
 
     u8g2.drawXBMP(126, 1, 1, 49, scrollBar);
     // draw scrollbar handle
-    u8g2.drawBox(125, 44/OPTIONSLIST_SIZE * selected, 3, 64/OPTIONSLIST_SIZE); 
+    u8g2.drawBox(125, 44/OPTIONSLIST_SIZE * highlighted, 3, 64/OPTIONSLIST_SIZE); 
 
   } while (u8g2.nextPage());
 }

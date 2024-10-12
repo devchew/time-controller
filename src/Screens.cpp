@@ -26,8 +26,8 @@ void drawMenuBar(String title, int type) {
 
   // type 3: save
   if (type == 3) {
-    u8g2.drawStr(1, 62, "Save");
-    u8g2.drawStr(91, 62, "Cencel");
+    u8g2.drawStr(1, 62, "Cancel");
+    u8g2.drawStr(91, 62, "Save");
   }
 }
 
@@ -72,7 +72,7 @@ Screen currentScreen = MAIN;
 
 void setScreen(Screen screen) {
   currentScreen = screen;
-  setupScreens();
+  highlighted = 0;
 }
 
 void setupScreens() {

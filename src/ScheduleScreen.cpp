@@ -41,10 +41,11 @@ void drawScheduleScreen(Button button) {
       }
     }
     if (highlighted == 4) {
-      //cancel
+      //save
       setScreen(MAIN);
-      newScheduleFrom = state.scheduleFrom;
-      newScheduleTo = state.scheduleTo;
+      state.scheduleFrom = newScheduleFrom;
+      state.scheduleTo = newScheduleTo;
+      saveState();
     }
   }
 
@@ -74,11 +75,10 @@ void drawScheduleScreen(Button button) {
       }
     }
     if (highlighted == 4) {
-      //save
+      //cancel
       setScreen(MAIN);
-      state.scheduleFrom = newScheduleFrom;
-      state.scheduleTo = newScheduleTo;
-      saveState();
+      newScheduleFrom = state.scheduleFrom;
+      newScheduleTo = state.scheduleTo;
     }
   }
 

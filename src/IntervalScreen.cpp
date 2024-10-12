@@ -32,10 +32,11 @@ if (button == CENTER) {
     }
 
     if (highlighted == 2) {
-      //cancel
+      //save
       setScreen(MAIN);
-      newIntervalWindow = state.intervalWindow;
-      newIntervalDuration = state.intervalDuration;
+      state.intervalWindow = newIntervalWindow;
+      state.intervalDuration = newIntervalDuration;
+      saveState();
     }
   }
 
@@ -53,11 +54,10 @@ if (button == CENTER) {
       }
     }
     if (highlighted == 2) {
-      //save
+      //cancel
       setScreen(MAIN);
-      state.intervalWindow = newIntervalWindow;
-      state.intervalDuration = newIntervalDuration;
-      saveState();
+      newIntervalWindow = state.intervalWindow;
+      newIntervalDuration = state.intervalDuration;
     }
   }
 
