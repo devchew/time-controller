@@ -73,12 +73,31 @@ Screen currentScreen = MAIN;
 void setScreen(Screen screen) {
   currentScreen = screen;
   highlighted = 0;
+  switch (screen) {
+    case MAIN:
+      setupMainScreen();
+      break;
+    case SETTINGS:
+      setupSettingsScreen();
+      break;
+    case SCHEDULE:
+      setupScheduleScreen();
+      break;
+    case INTERVAL:
+      setupIntervalScreen();
+      break;
+    case MANUAL:
+      break;
+    case TIME:
+      setupTimeScreen();
+      break;
+    default:
+      break;
+  }
 }
 
 void setupScreens() {
-  setupMainScreen();
-  setupSettingsScreen();
-  setupScheduleScreen();
+  setScreen(currentScreen);
 }
 
 void drawScreen() {
@@ -99,7 +118,7 @@ void drawScreen() {
       drawMainScreen(getButton());
       break;
     case TIME:
-      drawMainScreen(getButton());
+      drawTimeScreen(getButton());
       break;
     default:
       drawMainScreen(getButton());
