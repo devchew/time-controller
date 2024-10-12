@@ -12,6 +12,8 @@
 #include <Wire.h>
 #endif
 
-U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 14, /* reset=*/ 15);						// Nokia 5110 Display
+// U8G2_KS0108_128X64_1( rotation, d0, d1, d2, d3, d4, d5, d6, d7, enable, dc, cs0, cs1, cs2 [, reset])
+U8G2_KS0108_128X64_1 u8g2(U8G2_R2, 6, 7, 8, 9, 10, 11, 12, 13,     5, 4,  2,  3,  U8X8_PIN_NONE, U8X8_PIN_NONE); 	// Set R/W to low!
+
 
 #endif

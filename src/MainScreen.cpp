@@ -1,5 +1,5 @@
 #include "MainScreen.h"
-extern U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2;
+extern U8G2_KS0108_128X64_1 u8g2;
 extern State state;
 
 // time
@@ -28,45 +28,37 @@ void drawMainScreen(Button button) {
     setScreen(SETTINGS);
   }
 
-  currentTimeBar = map(state.currentTime, 0, 24 * 60, 4, 79);
-  startTimeBar = map(state.scheduleFrom, 0, 24 * 60, 4, 79);
-  endTimeBar = map((state.scheduleTo - state.scheduleFrom), 0, 24 * 60, 4, 79);
+  currentTimeBar = map(state.currentTime, 0, 24 * 60, 4, 123);
+  startTimeBar = map(state.scheduleFrom, 0, 24 * 60, 4, 123);
+  endTimeBar = map((state.scheduleTo - state.scheduleFrom), 0, 24 * 60, 2, 122);
 
   u8g2.firstPage();
   do {
+    // clock
+    u8g2.setFont(FONT_LARGE);
+    u8g2.drawStr(42, 19, getTime().c_str());
+
     //bottom bar
-    u8g2.setFont(u8g2_font_4x6_tr);
-    u8g2.drawStr(26, 46, "Settings");
-    u8g2.drawLine(0, 38, 83, 38);
+    drawMenuBar("Menu", 0);
 
     // time
-    u8g2.drawLine(4, 28, 79, 28);
-    u8g2.drawLine(4, 21, 79, 21);
-    u8g2.drawStr(2, 35, "0");
-    u8g2.drawStr(75, 35, "24");
-    u8g2.drawStr(37, 35, "12");
-    u8g2.drawStr(17, 35, "6");
-    u8g2.drawStr(57, 35, "18");
+    u8g2.drawLine(3, 39, 124, 39);
+    u8g2.drawLine(3, 28, 124, 28);
+    u8g2.drawStr(3, 48, "0");
+    u8g2.drawStr(113, 48, "24");
+    u8g2.drawStr(28, 48, "6");
+    u8g2.drawStr(86, 48, "18");
+    u8g2.drawStr(57, 48, "12");
 
     // timetable line
-    u8g2.drawBox(startTimeBar, 23, endTimeBar, 4);
+    u8g2.drawBox(startTimeBar, 30, endTimeBar, 8);
 
-    u8g2.drawLine(0, 0, 0, 0);
 
     // current time
-    u8g2.drawLine(currentTimeBar, 19, currentTimeBar, 17);
-
-    // clock
-    u8g2.setFont(u8g2_font_6x13_tr);
-    u8g2.drawStr(27, 16, getTime().c_str());
+    u8g2.drawLine(currentTimeBar, 22, currentTimeBar, 26);
 
     // state
-    u8g2.setFont(u8g2_font_4x6_tr);
-    if (state.isAuto) {
-      u8g2.drawStr(48, 5, "AUTO");
-      u8g2.drawLine(66, 1, 66, 4);
-    }
-    u8g2.drawStr(state.isOn ? 72 : 69, 5, state.isOn ? "On" : "OFF");
+    u8g2.drawStr(110, 8, state.isOn ? "On" : "OFF");
     
   } while (u8g2.nextPage());
 }

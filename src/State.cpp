@@ -6,6 +6,8 @@ State state;
 // 0-1: scheduleFrom
 // 2-3: scheduleTo
 // 4: isAuto
+// 5-6: intervalWindow
+// 7-8: intervalDuration
 
 void storeInt(int value, int address) {
   EEPROM.write(address, value & 0xFF);
@@ -30,6 +32,8 @@ void setupState() {
   state.currentTime = 0;
   state.isOn = false;
   state.isAuto = readBool(4);
+  state.intervalWindow = readInt(5);
+  state.intervalDuration = readInt(7);
 }
 
 void saveState() {
@@ -38,4 +42,6 @@ void saveState() {
   storeInt(state.scheduleFrom, 0);
   storeInt(state.scheduleTo, 2);
   storeBool(state.isAuto, 4);
+  storeInt(state.intervalWindow, 5);
+  storeInt(state.intervalDuration, 7);
 }
