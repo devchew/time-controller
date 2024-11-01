@@ -79,6 +79,17 @@ void drawButton(int x, int y, String title, int underlined) {
   if (underlined == 0) { u8g2.drawLine(x, y+1, x+10, y+1); }
 }
 
+void drawPumpAnimation(int x, int y, bool state) {
+  u8g2.drawXBM(x + 18, y, 20, 19, pump);
+  if (state) {
+    u8g2.drawXBM(x + 26, y + 5, 9, 9, now() % 2 == 0 ? rotor1 : rotor2);
+    u8g2.drawStr(x + 6, y + 13, "on");
+  } else {
+    u8g2.drawXBM(x + 30, y + 9, 9, 9, rotor2);
+    u8g2.drawStr(x, y + 13, "off");
+  }
+}
+
 Screen currentScreen = MAIN;
 
 void setScreen(Screen screen) {

@@ -72,15 +72,8 @@ void drawMainScreen(Button button) {
     u8g2.drawLine(currentTimeBar, 22, currentTimeBar, 26);
 
     // state
-    u8g2.drawXBM(105, 2, 20, 19, pump);
-    if (state.isOn) {
-      // set rotor1 and rotor2 animation frames
-      u8g2.drawXBM(113, 7, 9, 9, now() % 2 == 0 ? rotor1 : rotor2);
-      u8g2.drawStr(93, 15, "on");
-    } else {
-      u8g2.drawEllipse(117, 11, 2, 2);
-      u8g2.drawStr(87, 15, "off");
-    }
+    drawPumpAnimation(87, 2, state.isOn);
+
     
   } while (u8g2.nextPage());
 }

@@ -37,8 +37,6 @@ void selectScreen() {
 }
 
 void updateSelected() {
-  previousHighlighted = highlighted - 1;
-  nextHighlighted = highlighted + 1;
 
   if (highlighted >= OPTIONSLIST_SIZE) {
     highlighted = 0;
@@ -46,7 +44,11 @@ void updateSelected() {
   if (highlighted < 0) {
     highlighted = OPTIONSLIST_SIZE - 1;
   }
-  if (previousHighlighted <= 0) {
+
+  previousHighlighted = highlighted - 1;
+  nextHighlighted = highlighted + 1;
+
+  if (previousHighlighted < 0) {
     previousHighlighted = OPTIONSLIST_SIZE - 1;
   }
   if (nextHighlighted >= OPTIONSLIST_SIZE) {
