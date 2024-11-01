@@ -87,14 +87,14 @@ void drawScheduleScreen(Button button) {
     //bottom bar
 
     if (highlighted < 4) {
-      drawMenuBar("next", 2);
+      drawMenuBar(TEXT_NEXT, 2);
     } else {
-      drawMenuBar("next", 3);
+      drawMenuBar(TEXT_NEXT, 3);
     }
 
-    drawTimeSelector(2, 9, newScheduleFrom, highlighted, "On");
-    drawTimeSelector(83, 9, newScheduleTo, highlighted -2, "Off"); 
-    drawButton(54, 46, "OK", highlighted - 4);
+    drawTimeSelector(2, 9, newScheduleFrom, highlighted, TEXT_ON);
+    drawTimeSelector(83, 9, newScheduleTo, highlighted -2, TEXT_OFF); 
+    drawButton(54, 46, TEXT_OK, highlighted - 4);
 
   } while (u8g2.nextPage());
 }

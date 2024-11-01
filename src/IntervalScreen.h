@@ -6,6 +6,7 @@
 #include "Buttons.h"
 #include "Screens.h"
 #include "State.h"
+#include "Intl.h"
 
 void drawIntervalScreen(Button button);
 void setupIntervalScreen();

@@ -9,11 +9,11 @@ int nextHighlighted;
 #define OPTIONSLIST_SIZE 5
 
 static String options[OPTIONSLIST_SIZE] = {
-  "Time", 
-  "Schedule", 
-  "Interval",
-  "Manual", 
-  "Exit"
+  TEXT_TIME,
+  TEXT_SCHEDULE,
+  TEXT_INTERVAL,
+  TEXT_MANUAL,
+  TEXT_EXIT
 };
 
 void selectScreen() {
@@ -78,7 +78,7 @@ void drawSettingsScreen(Button button) {
   u8g2.firstPage();
 
   do {
-    drawMenuBar("Select", 1);
+    drawMenuBar(TEXT_SELECT, 1);
 
 
     //selectedFrame

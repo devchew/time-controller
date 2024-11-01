@@ -63,13 +63,13 @@ void drawTimeScreen(Button button) {
     //bottom bar
 
     if (highlighted < 2) {
-      drawMenuBar("next", 2);
+      drawMenuBar(TEXT_NEXT, 2);
     } else {
-      drawMenuBar("next", 3);
+      drawMenuBar(TEXT_NEXT, 3);
     }
 
-    drawTimeSelector(43, 9, newCurrentTime, highlighted, "Time");
-    drawButton(54, 46, "OK", highlighted - 2);
+    drawTimeSelector(43, 9, newCurrentTime, highlighted, TEXT_TIME);
+    drawButton(54, 46, TEXT_OK, highlighted - 2);
 
   } while (u8g2.nextPage());
 }

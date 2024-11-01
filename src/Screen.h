@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <U8g2lib.h>
+#include "Intl.h"
 
 // display setup
 #ifdef U8X8_HAVE_HW_SPI

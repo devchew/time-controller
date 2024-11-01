@@ -75,14 +75,14 @@ if (button == CENTER) {
     //bottom bar
 
     if (highlighted < 2) {
-      drawMenuBar("next", 2);
+      drawMenuBar(TEXT_NEXT, 2);
     } else {
-      drawMenuBar("next", 3);
+      drawMenuBar(TEXT_NEXT, 3);
     }
 
-    drawIntSelector(2, 9, newIntervalWindow, highlighted, "Window");
-    drawIntSelector(80, 9, newIntervalDuration, highlighted - 1, "Duration"); 
-    drawButton(54, 46, "OK", highlighted - 2);
+    drawIntSelector(2, 9, newIntervalWindow, highlighted, TEXT_WINDOW);
+    drawIntSelector(80, 9, newIntervalDuration, highlighted - 1, TEXT_DURATION); 
+    drawButton(54, 46, TEXT_OK, highlighted - 2);
 
   } while (u8g2.nextPage());
 }

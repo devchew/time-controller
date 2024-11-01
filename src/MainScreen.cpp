@@ -45,7 +45,7 @@ void drawMainScreen(Button button) {
     u8g2.drawStr(42, 18, getTime().c_str());
 
     //bottom bar
-    drawMenuBar("Menu", 0);
+    drawMenuBar(TEXT_MENU, 0);
 
     // time
     u8g2.drawLine(3, 39, 124, 39);

@@ -26,19 +26,19 @@ void drawMenuBar(String title, int type) {
 
   // type 3: save
   if (type == 3) {
-    u8g2.drawStr(1, 62, "Cancel");
-    u8g2.drawStr(91, 62, "Save");
+    u8g2.drawStr(1, 62, TEXT_CANCEL);
+    u8g2.drawStr(91, 62, TEXT_SAVE);
   }
 
   // type 4: on off
   if (type == 4) {
-    u8g2.drawStr(1, 62, "Off");
-    u8g2.drawStr(91, 62, "On");
+    u8g2.drawStr(1, 62, TEXT_OFF);
+    u8g2.drawStr(91, 62, TEXT_ON);
   }
 
   // type 5: ok
   if (type == 5) {
-    u8g2.drawStr(91, 62, "Ok");
+    u8g2.drawStr(91, 62, TEXT_OK);
   }
 }
 
@@ -83,10 +83,10 @@ void drawPumpAnimation(int x, int y, bool state) {
   u8g2.drawXBM(x + 18, y, 20, 19, pump);
   if (state) {
     u8g2.drawXBM(x + 26, y + 5, 9, 9, now() % 2 == 0 ? rotor1 : rotor2);
-    u8g2.drawStr(x + 6, y + 13, "on");
+    u8g2.drawStr(x + 6, y + 13, TEXT_ON);
   } else {
     u8g2.drawXBM(x + 30, y + 9, 9, 9, rotor2);
-    u8g2.drawStr(x, y + 13, "off");
+    u8g2.drawStr(x, y + 13, TEXT_OFF);
   }
 }
 
@@ -150,6 +150,6 @@ void drawScreen() {
 
 void drawBottomBar() {
   u8g2.setFont(u8g2_font_6x10_tr);
-  u8g2.drawStr(51, 60, "menu");
+  u8g2.drawStr(51, 60, TEXT_MENU);
   u8g2.drawLine(0, 52, 128, 52);
 }

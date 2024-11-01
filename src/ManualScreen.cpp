@@ -40,19 +40,19 @@ void drawManualScreen(Button button) {
     //bottom bar
 
     if (highlighted == 0) {
-      drawMenuBar("next", 5);
+      drawMenuBar(TEXT_NEXT, 5);
     } else {
-      drawMenuBar("next", 4);
+      drawMenuBar(TEXT_NEXT, 4);
     }
 
-    u8g2.drawStr(45, 27, state.isOn ? "on" : "off");
-    u8g2.drawStr(45, 13, state.isAuto ? "auto" : "manual");
+    u8g2.drawStr(45, 27, state.isOn ? TEXT_ON : TEXT_OFF);
+    u8g2.drawStr(45, 13, state.isAuto ? TEXT_AUTO : TEXT_MANUAL);
 
     u8g2.drawLine(40, 1, 40, 49);    
 
-    drawButton(5, 13, "Mode", highlighted - 1);
-    drawButton(5, 26, "Pump", highlighted - 2);
-    drawButton(5, 45, "Exit", highlighted);
+    drawButton(5, 13, TEXT_MODE, highlighted - 1);
+    drawButton(5, 26, TEXT_PUMP, highlighted - 2);
+    drawButton(5, 45, TEXT_EXIT, highlighted);
 
     // state
     drawPumpAnimation(87, 2, state.isOn);

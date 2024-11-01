@@ -7,6 +7,7 @@
 #include "Screens.h"
 #include "State.h"
 #include "Time.h"
+#include "Intl.h"
 
 void drawTimeScreen(Button button);
 void setupTimeScreen();
