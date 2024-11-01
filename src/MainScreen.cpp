@@ -23,20 +23,26 @@ String getTime() {
   return time;
 }
 
+// same as map(position, 0, 24 * 60, 4, 123);
+long mapTimeLine(long position)
+{
+  return (position) * (119) / 1444;
+}
+
 void drawMainScreen(Button button) {
   if (button == CENTER) {
     setScreen(SETTINGS);
   }
 
-  currentTimeBar = map(state.currentTime, 0, 24 * 60, 4, 123);
-  startTimeBar = map(state.scheduleFrom, 0, 24 * 60, 4, 123);
-  endTimeBar = map((state.scheduleTo - state.scheduleFrom), 0, 24 * 60, 2, 122);
+  currentTimeBar = mapTimeLine(state.currentTime);
+  startTimeBar = mapTimeLine(state.scheduleFrom);
+  endTimeBar = mapTimeLine(state.scheduleTo - state.scheduleFrom);
 
   u8g2.firstPage();
   do {
     // clock
     u8g2.setFont(FONT_LARGE);
-    u8g2.drawStr(42, 19, getTime().c_str());
+    u8g2.drawStr(42, 18, getTime().c_str());
 
     //bottom bar
     drawMenuBar("Menu", 0);
@@ -51,16 +57,33 @@ void drawMainScreen(Button button) {
     u8g2.drawStr(57, 48, "12");
 
     // timetable line
-    u8g2.drawBox(startTimeBar, 30, endTimeBar, 8);
+    u8g2.drawFrame(startTimeBar, 30, endTimeBar, 8);
+    //interval fill
+
+    //loop from startTime to endTime with step of intervalWindow
+    for (int i = state.scheduleFrom; i < state.scheduleTo; i += state.intervalWindow) {
+      int width = mapTimeLine(i + state.intervalDuration) - mapTimeLine(i);
+      u8g2.drawBox(mapTimeLine(i), 30, width, 8);
+    }
+
 
 
     // current time
     u8g2.drawLine(currentTimeBar, 22, currentTimeBar, 26);
 
     // state
-    u8g2.drawStr(110, 8, state.isOn ? "On" : "OFF");
+    u8g2.drawXBM(105, 2, 20, 19, pump);
+    if (state.isOn) {
+      // set rotor1 and rotor2 animation frames
+      u8g2.drawXBM(113, 7, 9, 9, now() % 2 == 0 ? rotor1 : rotor2);
+      u8g2.drawStr(93, 15, "on");
+    } else {
+      u8g2.drawEllipse(117, 11, 2, 2);
+      u8g2.drawStr(87, 15, "off");
+    }
     
   } while (u8g2.nextPage());
 }
 
-void setupMainScreen(){};
+void setupMainScreen(){
+};

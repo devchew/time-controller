@@ -4,8 +4,8 @@ extern State state;
 
 extern int highlighted;
 
-int newIntervalWindow = 0;
-int newIntervalDuration = 0;
+int newIntervalWindow = 1;
+int newIntervalDuration = 1;
 
 #define MAX_WINDOW 1440
 
@@ -21,13 +21,16 @@ if (button == CENTER) {
     if (highlighted == 0) {
       newIntervalWindow ++;
       if (newIntervalWindow > MAX_WINDOW) {
-        newIntervalWindow = 0;
+        newIntervalWindow = 1;
+        if (newIntervalDuration > newIntervalWindow) {
+          newIntervalDuration = newIntervalWindow;
+        }
       }
     }
     if (highlighted == 1) {
       newIntervalDuration++;
       if (newIntervalDuration > newIntervalWindow) {
-        newIntervalDuration = 0;
+        newIntervalDuration = newIntervalWindow;
       }
     }
 
@@ -43,14 +46,20 @@ if (button == CENTER) {
   if (button == LEFT) {
     if (highlighted == 0) {
       newIntervalWindow --;
-      if (newIntervalWindow < 0) {
+      if (newIntervalWindow < 1) {
         newIntervalWindow = MAX_WINDOW;
+      }
+      if (newIntervalDuration > newIntervalWindow) {
+        newIntervalDuration = newIntervalWindow;
       }
     }
     if (highlighted == 1) {
       newIntervalDuration--;
-      if (newIntervalDuration < 0) {
-        newIntervalDuration = 0;
+      if (newIntervalDuration < 1) {
+        newIntervalDuration = 1;
+      }
+      if (newIntervalDuration > newIntervalWindow) {
+        newIntervalDuration = newIntervalWindow;
       }
     }
     if (highlighted == 2) {

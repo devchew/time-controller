@@ -29,6 +29,17 @@ void drawMenuBar(String title, int type) {
     u8g2.drawStr(1, 62, "Cancel");
     u8g2.drawStr(91, 62, "Save");
   }
+
+  // type 4: on off
+  if (type == 4) {
+    u8g2.drawStr(1, 62, "Off");
+    u8g2.drawStr(91, 62, "On");
+  }
+
+  // type 5: ok
+  if (type == 5) {
+    u8g2.drawStr(91, 62, "Ok");
+  }
 }
 
 void drawTimeSelector(int x, int y, int time, int underlined, String title) {
@@ -115,7 +126,7 @@ void drawScreen() {
       drawIntervalScreen(getButton());
       break;
     case MANUAL:
-      drawMainScreen(getButton());
+      drawManualScreen(getButton());
       break;
     case TIME:
       drawTimeScreen(getButton());

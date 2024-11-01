@@ -9,6 +9,7 @@
 #include "ScheduleScreen.h"
 #include "IntervalScreen.h"
 #include "TimeScreen.h"
+#include "ManualScreen.h"
 
 #define FONT_NORMAL u8g2_font_6x10_tr
 #define FONT_LARGE u8g2_font_timR14_tr
