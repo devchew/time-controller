@@ -45,7 +45,7 @@ void drawMainScreen(Button button) {
     u8g2.drawStr(42, 18, getTime().c_str());
 
     //bottom bar
-    drawMenuBar(TEXT_MENU, 0);
+    drawMenuBar(0);
 
     // time
     u8g2.drawLine(3, 39, 124, 39);
@@ -72,7 +72,7 @@ void drawMainScreen(Button button) {
     u8g2.drawLine(currentTimeBar, 22, currentTimeBar, 26);
 
     // state
-    drawPumpAnimation(87, 2, state.isOn);
+    drawPumpAnimation(87, 2, true);
 
     
   } while (u8g2.nextPage());

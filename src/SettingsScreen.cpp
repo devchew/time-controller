@@ -78,7 +78,7 @@ void drawSettingsScreen(Button button) {
   u8g2.firstPage();
 
   do {
-    drawMenuBar(TEXT_SELECT, 1);
+    drawMenuBar(1);
 
 
     //selectedFrame

@@ -10,6 +10,7 @@
 #include "IntervalScreen.h"
 #include "TimeScreen.h"
 #include "ManualScreen.h"
+#include "State.h"
 
 #define FONT_NORMAL u8g2_font_6x10_tr
 #define FONT_LARGE u8g2_font_timR14_tr
@@ -41,9 +42,10 @@ void drawBottomBar();
 // @param title - title in the center of the bar
 // @param type - arrows, plusminus, none
 
-void drawMenuBar(String title, int type);
+void drawMenuBar(int type);
 void drawTimeSelector(int x, int y, int time, int underlined, String title);
 void drawButton(int x, int y, String title, int underlined);
+void drawSaveOnCenterButton(int y, int underlined);
 void drawIntSelector(int x, int y, int value, int underlined, String title);
 void drawPumpAnimation(int x, int y, bool state);
 #endif
