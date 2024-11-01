@@ -19,10 +19,10 @@ void setup(void) {
   setupButtons();
   setupRelay();
   setupState();
-  setupScreens();
   setupScheduler();
   setupTime();
   setupRemote();
+  setupScreens();
 }
 
 

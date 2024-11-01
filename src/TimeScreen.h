@@ -1,14 +1,15 @@
-#ifndef MAIN_SCREEN_H
-#define MAIN_SCREEN_H
+#ifndef TIME_SCREEN_H
+#define TIME_SCREEN_H
 
 #include <Arduino.h>
 #include <U8g2lib.h>
 #include "Buttons.h"
 #include "Screens.h"
 #include "State.h"
+#include "Time.h"
 #include "Intl.h"
 
-void drawMainScreen(Button button);
-void setupMainScreen();
+void drawTimeScreen(Button button);
+void setupTimeScreen();
 
 #endif

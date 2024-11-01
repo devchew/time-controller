@@ -34,10 +34,13 @@ void cmdHelp() {
     Serial.println("set state [on|off]");
     Serial.println("set schedule [hh:mm hh:mm]");
     Serial.println("set auto [on|off]");
+    Serial.println("set interval window [mm]");
+    Serial.println("set interval duration [mm]");
     Serial.println("get time");
     Serial.println("get state");
     Serial.println("get schedule");
     Serial.println("get auto");    
+    Serial.println("get interval");
 }
 
 void cmdSetTime(String input) {
@@ -81,6 +84,26 @@ void cmdSetAutoMode(String input) {
     }
 }
 
+void cmdSetIntervalWindow(String input) {
+    state.intervalWindow = input.toInt();
+    if (state.intervalWindow < 1) {
+        state.intervalWindow = 1;
+    }
+    if (state.intervalDuration > state.intervalWindow) {
+        state.intervalDuration = state.intervalWindow;
+    }
+    saveState();
+}
+
+void cmdSetIntervalDuration(String input) {
+    state.intervalDuration = input.toInt();
+    saveState();
+}
+
+void cmdGetInterval() {
+    Serial.println(String(state.intervalWindow) + " " + String(state.intervalDuration));
+}
+
 void cmdGetTime() {
     int hours = state.currentTime / 60;
     int minutes = state.currentTime % 60;
@@ -122,6 +145,10 @@ void remoteLoop() {
             cmdSetSchedule(input.substring(13));
         } else if (input.startsWith("set auto")) {
             cmdSetAutoMode(input.substring(9));
+        } else if (input.startsWith("set interval window")) {
+            cmdSetIntervalWindow(input.substring(20));
+        } else if (input.startsWith("set interval duration")) {
+            cmdSetIntervalDuration(input.substring(22));
         } else if (input == "get time") {
             cmdGetTime();
         } else if (input == "get state") {
@@ -130,6 +157,8 @@ void remoteLoop() {
             cmdGetSchedule();
         } else if (input == "get auto") {
             cmdGetAutoMode();
+        } else if (input == "get interval") {
+            cmdGetInterval();
         } else {
           Serial.println("Unknown command");
         }

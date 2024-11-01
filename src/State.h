@@ -11,6 +11,10 @@ struct State {
     int scheduleTo;
     // current time in minutes
     int currentTime;
+    // interval window in minutes
+    int intervalWindow;
+    // interval duration in minutes
+    int intervalDuration;
     
     bool isOn;
     bool isAuto;

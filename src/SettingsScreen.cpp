@@ -1,72 +1,102 @@
 #include "SettingsScreen.h"
-extern U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2;
+extern U8G2_KS0108_128X64_1 u8g2;
 extern State state;
 
-int option = 0;
+extern int highlighted;
+int previousHighlighted;
+int nextHighlighted;
 
-#define OPTIONSLIST_SIZE 3
+#define OPTIONSLIST_SIZE 5
 
 static String options[OPTIONSLIST_SIZE] = {
-  "Auto",
-  "Schedule",
-  "Exit"
+  TEXT_TIME,
+  TEXT_SCHEDULE,
+  TEXT_INTERVAL,
+  TEXT_MANUAL,
+  TEXT_EXIT
 };
 
-void setupSettingsScreen() {}
+void selectScreen() {
+  switch (highlighted) {
+    case 0:
+      setScreen(TIME);
+      break;
+    case 1:
+      setScreen(SCHEDULE);
+      break;
+    case 2:
+      setScreen(INTERVAL);
+      break;
+    case 3:
+      setScreen(MANUAL);
+      break;
+    case 4:
+      setScreen(MAIN);
+      break;
+  }
+}
 
-void drawSettingsScreen(Button button) {
-  if (button == LEFT) {
-    option++;
-    if (option >= OPTIONSLIST_SIZE) {
-      option = 0;
-    }
+void updateSelected() {
+
+  if (highlighted >= OPTIONSLIST_SIZE) {
+    highlighted = 0;
+  }
+  if (highlighted < 0) {
+    highlighted = OPTIONSLIST_SIZE - 1;
   }
 
+  previousHighlighted = highlighted - 1;
+  nextHighlighted = highlighted + 1;
+
+  if (previousHighlighted < 0) {
+    previousHighlighted = OPTIONSLIST_SIZE - 1;
+  }
+  if (nextHighlighted >= OPTIONSLIST_SIZE) {
+    nextHighlighted = 0;
+  }
+}
+
+void setupSettingsScreen() {
+  updateSelected();
+}
+
+void drawSettingsScreen(Button button) {
   if (button == RIGHT) {
-    option--;
-    if (option < 0) {
-      option = OPTIONSLIST_SIZE - 1;
-    }
+    highlighted++;
+    updateSelected();
+  }
+
+  if (button == LEFT) {
+    highlighted--;
+    updateSelected();
   }
 
   if (button == CENTER) {
-    if (option == 0) {
-      state.isAuto = !state.isAuto;
-    }
-    if (option == 1) {
-      setScreen(SCHEDULE);
-    }
-    if (option == 2) {
-      setScreen(MAIN);
-    }
+    selectScreen();
   }
 
   u8g2.firstPage();
+
   do {
-    //bottom bar
-    u8g2.setFont(u8g2_font_4x6_tr);
-    u8g2.drawStr(37, 46, "OK");
-    u8g2.drawLine(0, 38, 83, 38);
-    u8g2.drawLine(69, 44, 72, 41);
-    u8g2.drawLine(72, 41, 75, 44);
-    u8g2.drawLine(6, 42, 9, 45);
-    u8g2.drawLine(9, 45, 12, 42);
+    drawMenuBar(1);
 
-    // options
-    u8g2.setFont(u8g2_font_6x10_tr);
 
-    for(int i = 0; i < OPTIONSLIST_SIZE; i++) {
-      if (i == 0 && state.isAuto) {
-        u8g2.drawStr(4, 11 + 12 * i, "Auto: on");
-      } else if (i == 0 && !state.isAuto) {
-        u8g2.drawStr(4, 11 + 12 * i, "Auto: off");
-      } else {
-        u8g2.drawStr(4, 11 + 12 * i, options[i].c_str());
-      }
-      if (option == i) {
-        u8g2.drawLine(4, 12 + 12 * i, 79, 12 + 12 * i);
-      }
-    }
+    //selectedFrame
+    u8g2.drawRFrame(0, 18, 122, 16, 2);
+
+    //previous
+    u8g2.drawStr(2, 11, options[previousHighlighted].c_str());
+
+    //current
+    u8g2.drawStr(2, 29, options[highlighted].c_str());
+
+    //next
+    u8g2.drawStr(2, 46, options[nextHighlighted].c_str());
+
+
+    u8g2.drawXBMP(126, 1, 1, 49, scrollBar);
+    // draw scrollbar handle
+    u8g2.drawBox(125, 44/OPTIONSLIST_SIZE * highlighted, 3, 64/OPTIONSLIST_SIZE); 
 
   } while (u8g2.nextPage());
 }

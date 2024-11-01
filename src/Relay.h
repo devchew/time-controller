@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include "State.h"
 
-#define RELAY 5
+#define RELAY A3
 
 
 void setupRelay();
