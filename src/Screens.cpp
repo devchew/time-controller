@@ -10,6 +10,8 @@ void drawMenuBar(int type) {
   // write title in center
   if (type == 0) {
     u8g2.drawStr(64 - sizeof(TEXT_MENU) * 3, 62, TEXT_MENU);
+  } else if(type == 1) {
+    u8g2.drawStr(64 - sizeof(TEXT_SELECT) * 3, 62, TEXT_SELECT);
   } else {
     u8g2.drawStr(64 - sizeof(TEXT_NEXT) * 3, 62, TEXT_NEXT);
   }
@@ -123,6 +125,7 @@ void setScreen(Screen screen) {
       setupIntervalScreen();
       break;
     case MANUAL:
+      setupManualScreen();
       break;
     case TIME:
       setupTimeScreen();

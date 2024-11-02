@@ -7,6 +7,7 @@
 #define TEXT_EXIT "wyjscie"
 #define TEXT_SAVE "zapisz"
 #define TEXT_OK "ok"
+#define TEXT_SELECT "wybierz"
 
 #define TEXT_YES "tak"
 #define TEXT_NO "nie"
